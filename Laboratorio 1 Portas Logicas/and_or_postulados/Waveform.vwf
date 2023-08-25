@@ -232,6 +232,91 @@ SIGNAL("segunda_morgan_2")
 	PARENT = "";
 }
 
+SIGNAL("Comutativa_and_1")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("Comutativa_and_2")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("Comutativa_or_1")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("Comutativa_or_2")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+GROUP("Segunda_lei_Morgan")
+{
+	MEMBERS = "segunda_morgan_1", "segunda_morgan_2";
+}
+
+GROUP("Primeira_Lei_Morgan")
+{
+	MEMBERS = "primeira_morgan_1", "primeira_morgan_2";
+}
+
+GROUP("adicao_associtividade")
+{
+	MEMBERS = "adicao_1", "adicao_2";
+}
+
+GROUP("multiplicacao_associativa")
+{
+	MEMBERS = "multiplicacao_1", "multiplicacao_2";
+}
+
+GROUP("and_distributiva")
+{
+	MEMBERS = "distributiva_and_1", "distributiva_and_2";
+}
+
+GROUP("Or_distributiva")
+{
+	MEMBERS = "distributiva_or_1", "distributiva_or_2";
+}
+
+GROUP("Identidade")
+{
+	MEMBERS = "Identidade_and", "Identidade_not", "Identidade_or";
+}
+
+GROUP("Or_comutativo")
+{
+	MEMBERS = "Comutativa_or_1", "Comutativa_or_2";
+}
+
+GROUP("and_comutativa")
+{
+	MEMBERS = "Comutativa_and_1", "Comutativa_and_2";
+}
+
 TRANSITION_LIST("a")
 {
 	NODE
@@ -427,6 +512,42 @@ TRANSITION_LIST("segunda_morgan_2")
 	}
 }
 
+TRANSITION_LIST("Comutativa_and_1")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("Comutativa_and_2")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("Comutativa_or_1")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("Comutativa_or_2")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
 DISPLAY_LINE
 {
 	CHANNEL = "a";
@@ -456,7 +577,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "adicao_1";
+	CHANNEL = "gate_or";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 3;
@@ -465,7 +586,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "adicao_2";
+	CHANNEL = "gate_and";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 4;
@@ -474,56 +595,12 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "distributiva_and_1";
+	CHANNEL = "Identidade";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
 	TREE_INDEX = 5;
 	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "distributiva_and_2";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
-	TREE_INDEX = 6;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "distributiva_or_1";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
-	TREE_INDEX = 7;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "distributiva_or_2";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
-	TREE_INDEX = 8;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "gate_and";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
-	TREE_INDEX = 9;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "gate_or";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
-	TREE_INDEX = 10;
-	TREE_LEVEL = 0;
+	CHILDREN = 6, 7, 8;
 }
 
 DISPLAY_LINE
@@ -531,8 +608,9 @@ DISPLAY_LINE
 	CHANNEL = "Identidade_and";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 11;
-	TREE_LEVEL = 0;
+	TREE_INDEX = 6;
+	TREE_LEVEL = 1;
+	PARENT = 5;
 }
 
 DISPLAY_LINE
@@ -540,8 +618,9 @@ DISPLAY_LINE
 	CHANNEL = "Identidade_not";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 12;
-	TREE_LEVEL = 0;
+	TREE_INDEX = 7;
+	TREE_LEVEL = 1;
+	PARENT = 5;
 }
 
 DISPLAY_LINE
@@ -549,8 +628,109 @@ DISPLAY_LINE
 	CHANNEL = "Identidade_or";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 13;
+	TREE_INDEX = 8;
+	TREE_LEVEL = 1;
+	PARENT = 5;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "Or_comutativo";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 9;
 	TREE_LEVEL = 0;
+	CHILDREN = 10, 11;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "Comutativa_or_1";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 10;
+	TREE_LEVEL = 1;
+	PARENT = 9;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "Comutativa_or_2";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 11;
+	TREE_LEVEL = 1;
+	PARENT = 9;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "and_comutativa";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 12;
+	TREE_LEVEL = 0;
+	CHILDREN = 13, 14;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "Comutativa_and_1";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 13;
+	TREE_LEVEL = 1;
+	PARENT = 12;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "Comutativa_and_2";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 14;
+	TREE_LEVEL = 1;
+	PARENT = 12;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "adicao_associtividade";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 15;
+	TREE_LEVEL = 0;
+	CHILDREN = 16, 17;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "adicao_1";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 16;
+	TREE_LEVEL = 1;
+	PARENT = 15;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "adicao_2";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 17;
+	TREE_LEVEL = 1;
+	PARENT = 15;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "multiplicacao_associativa";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 18;
+	TREE_LEVEL = 0;
+	CHILDREN = 19, 20;
 }
 
 DISPLAY_LINE
@@ -558,8 +738,9 @@ DISPLAY_LINE
 	CHANNEL = "multiplicacao_1";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 14;
-	TREE_LEVEL = 0;
+	TREE_INDEX = 19;
+	TREE_LEVEL = 1;
+	PARENT = 18;
 }
 
 DISPLAY_LINE
@@ -567,8 +748,79 @@ DISPLAY_LINE
 	CHANNEL = "multiplicacao_2";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 15;
+	TREE_INDEX = 20;
+	TREE_LEVEL = 1;
+	PARENT = 18;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "Or_distributiva";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 21;
 	TREE_LEVEL = 0;
+	CHILDREN = 22, 23;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "distributiva_or_1";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 22;
+	TREE_LEVEL = 1;
+	PARENT = 21;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "distributiva_or_2";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 23;
+	TREE_LEVEL = 1;
+	PARENT = 21;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "and_distributiva";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 24;
+	TREE_LEVEL = 0;
+	CHILDREN = 25, 26;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "distributiva_and_1";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 25;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "distributiva_and_2";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 26;
+	TREE_LEVEL = 1;
+	PARENT = 24;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "Primeira_Lei_Morgan";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 27;
+	TREE_LEVEL = 0;
+	CHILDREN = 28, 29;
 }
 
 DISPLAY_LINE
@@ -576,8 +828,9 @@ DISPLAY_LINE
 	CHANNEL = "primeira_morgan_1";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 16;
-	TREE_LEVEL = 0;
+	TREE_INDEX = 28;
+	TREE_LEVEL = 1;
+	PARENT = 27;
 }
 
 DISPLAY_LINE
@@ -585,8 +838,19 @@ DISPLAY_LINE
 	CHANNEL = "primeira_morgan_2";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 17;
+	TREE_INDEX = 29;
+	TREE_LEVEL = 1;
+	PARENT = 27;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "Segunda_lei_Morgan";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 30;
 	TREE_LEVEL = 0;
+	CHILDREN = 31, 32;
 }
 
 DISPLAY_LINE
@@ -594,8 +858,9 @@ DISPLAY_LINE
 	CHANNEL = "segunda_morgan_1";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 18;
-	TREE_LEVEL = 0;
+	TREE_INDEX = 31;
+	TREE_LEVEL = 1;
+	PARENT = 30;
 }
 
 DISPLAY_LINE
@@ -603,8 +868,9 @@ DISPLAY_LINE
 	CHANNEL = "segunda_morgan_2";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 19;
-	TREE_LEVEL = 0;
+	TREE_INDEX = 32;
+	TREE_LEVEL = 1;
+	PARENT = 30;
 }
 
 TIME_BAR
