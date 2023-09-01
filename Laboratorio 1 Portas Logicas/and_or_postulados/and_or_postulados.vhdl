@@ -18,11 +18,13 @@ end;
 architecture arch of and_or_postulados is
 begin
 
+    -- Or gate
+    gate_or <= a or b or c;
+    
     -- And gate
     gate_and <= a and b and c;
     
-    -- Or gate
-    gate_or <= a or b or c;
+    
     
     -- Comutatividade
     Comutativa_or_1 <= a or b;
