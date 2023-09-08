@@ -19,6 +19,20 @@ architecture arch of contaUm is
     signal s2_4:std_logic;
     signal s2_5:std_logic;
 
+    component portAnd3 is
+        port( 
+            a,b,c: in std_logic;
+            s: out std_logic
+        );
+    end component;
+    
+    component portOr3 is
+        port( 
+            a,b,c: in std_logic;
+            s: out std_logic
+        );
+    end component;
+
 begin
 
     -- S1
